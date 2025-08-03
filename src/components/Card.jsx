@@ -33,7 +33,6 @@ const Card = (props) =>  {
           <button className="editButton" onClick={goToEdit}>Edit</button>
           <h2 className="title">{props.title}</h2>
           <h3 className="author">{"by " + props.author}</h3>
-      <p className="description">{props.description}</p>
       <small>
         Posted by {props.author} • {formatDistanceToNow(new Date(props.created_at), { addSuffix: true })}
       </small>

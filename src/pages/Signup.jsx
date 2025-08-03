@@ -36,7 +36,7 @@ function Signup() {
       return
     }
 
-    // 2. Insert profile record
+    // insert profile record into 'profiles' table
     const { error: profileError } = await supabase
       .from('profiles')
       .insert([
@@ -46,6 +46,7 @@ function Signup() {
         },
       ])
 
+    // debugging to make sure posts and profiles tables are connected using foreign key
     if (profileError) {
       console.error('Profile insert error:', profileError.message, profileError)
       setError('Signup succeeded, but failed to save your name.')

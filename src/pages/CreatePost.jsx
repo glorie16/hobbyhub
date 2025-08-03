@@ -95,7 +95,6 @@ const CreatePost = () => {
           id="description"
           name="description"
           onChange={handleChange}
-          required
         /><br /><br />
 
         <label htmlFor="image">Image</label><br />

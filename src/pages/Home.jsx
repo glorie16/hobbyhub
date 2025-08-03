@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import { supabase } from '../Client'
@@ -8,6 +8,9 @@ function Home() {
   const [posts, setPosts] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [currentUserProfile, setCurrentUserProfile] = useState(null)
+  const [searchInput, setSearchInput] = useState("")
+  const [filteredResults, setFilteredResults] = useState([])
+  const [sortBy, setSortBy] = useState('newest')
 
   // Listen for auth state and set current user
   useEffect(() => {
@@ -79,15 +82,53 @@ function Home() {
     }
     fetchData()
   }, [])
+
+  useEffect(() => {
+    filterPosts()
+  }, [searchInput, posts, sortBy])
+
+  // Handle search input change and filter changes
+  const filterPosts = () => {
+    let filtered = [...posts];
+    if (searchInput.trim() !== "") {
+       filtered = filtered.filter(post =>
+        post.title?.toLowerCase().includes(searchInput.toLowerCase())
+      );
+    }
+
+    if (sortBy === 'likes') {
+      filtered = filtered.sort((a, b) => b.like_count - a.like_count);
+    }
+    else if (sortBy === 'newest') {
+      filtered = filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    }
+
+      setFilteredResults(filtered);
+      return;
+  }
   
 
   return (
     <div className="Home">
-      <Header />
+      <Header
+      setSearchInput={setSearchInput}/>
       <h1>{`Welcome to Arthub, ${currentUserProfile?.name || 'Guest'}`}</h1>
+
+      <div className="sort-buttons">
+        <button
+          className="newest-button"
+          onClick={() => setSortBy('newest')}>
+          Newest
+        </button>
+        <button
+          className="likes-button"
+          onClick={() => setSortBy('likes')}>
+          Most Likes
+        </button>
+      </div>
       <div className="post-list">
-        {posts.length > 0 ? (
-          posts.map(post => (
+        {filteredResults.length > 0 ? (
+          filteredResults.map(post => (
             <Link key={post.id} to={`/post-details/${post.id}`}>
               <Card
                 id={post.id}

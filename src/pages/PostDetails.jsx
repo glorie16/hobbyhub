@@ -10,6 +10,8 @@ function PostDetails() {
   const [error, setError] = useState(null)
   const [count, setCount] = useState(0) 
   const [updating, setUpdating] = useState(false) //disable button during update
+  const [commentsList, setCommentsList] = useState([]) // Initialize comments list
+  const [newComment, setNewComment] = useState('') // State for new comment input
 
   useEffect(() => {
     const fetchPost = async () => {

@@ -4,7 +4,7 @@ import { supabase } from '../Client'
 import { useState } from 'react'
 import './Header.css' 
 
-function Header() {
+function Header(props) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -32,7 +32,11 @@ function Header() {
           type="text"
           placeholder="Search art, tutorials..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={e => {
+            const value = e.target.value
+            setSearchTerm(value)
+            props.setSearchInput(value) // Pass the search term to the parent component home.jsx
+          }}
           className="search-input"
         />
       </form>
