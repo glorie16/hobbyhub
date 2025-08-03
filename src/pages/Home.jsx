@@ -1,4 +1,5 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../contexts/UserContext'; 
 import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import { supabase } from '../Client'
@@ -6,55 +7,13 @@ import Header from '../components/Header'
 
 function Home() {
   const [posts, setPosts] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
-  const [currentUserProfile, setCurrentUserProfile] = useState(null)
+  const { currentUser, currentUserProfile } = useContext(UserContext);
   const [searchInput, setSearchInput] = useState("")
   const [filteredResults, setFilteredResults] = useState([])
   const [sortBy, setSortBy] = useState('newest')
 
   // Listen for auth state and set current user
-  useEffect(() => {
-    const getSessionUser = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-      setCurrentUser(session?.user ?? null)
-    }
-    getSessionUser()
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setCurrentUser(session?.user ?? null)
-    })
-
-    return () => {
-      authListener.subscription.unsubscribe()
-    }
-  }, [])
-
-  // Fetch current user profile when currentUser changes
-  useEffect(() => {
-    if (!currentUser) {
-      setCurrentUserProfile(null)
-      return
-    }
-
-    const fetchProfile = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('id, name')
-        .eq('id', currentUser.id)
-        .single()
-
-      if (error) {
-        console.error('Error fetching user profile:', error)
-      } else {
-        setCurrentUserProfile(data)
-      }
-    }
-    fetchProfile()
-  }, [currentUser])
-
-  // Fetch posts as before
+   // Fetch posts as before
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
