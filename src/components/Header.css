@@ -1,0 +1,78 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 96%;
+  max-width: 100vw;
+  padding: 1rem 2rem;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+  .nav-link,
+.logout-btn {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #d9534f;
+  cursor: pointer;
+  font-weight: 500;
+  padding-right:1.2rem;
+}
+
+.search-form {
+  margin: 0 1rem;
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 15px; 
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #78c2fa; 
+  box-shadow: #78c2fa;
+}
