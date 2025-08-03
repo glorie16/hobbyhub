@@ -13,6 +13,7 @@ function PostDetails() {
   const [commentsList, setCommentsList] = useState([]) // Initialize comments list
   const [newComment, setNewComment] = useState('') // State for new comment input
 
+  
   useEffect(() => {
     const fetchPost = async () => {
       const { data, error } = await supabase
