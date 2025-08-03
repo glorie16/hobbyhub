@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext';
 import { supabase } from '../Client'
-import { formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow, set } from 'date-fns'
 
 function PostDetails() {
   const { id } = useParams() // get post ID from URL
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [count, setCount] = useState(0) 
+  const [count, setCount] = useState(0)
   const [updating, setUpdating] = useState(false) //disable button during update
   const [commentsList, setCommentsList] = useState([]) // Initialize comments list
   const [newComment, setNewComment] = useState('') // State for new comment input
+  const [submitting, setSubmitting] = useState(false);
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -45,6 +48,21 @@ function PostDetails() {
     fetchPost()
   }, [id])
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      const { data, error } = await supabase
+        .from('comments')
+        .select('id, content, created_at, profiles (id, name)')
+        .eq('post_id', id)
+      
+      if (error) {
+        console.error('Failed to fetch comments:', error)
+      }
+      setCommentsList(data || [])
+    }
+    fetchComments()
+  }, [id])
+
   const updateCount = async (event) => {
     event.preventDefault()
     if (updating) return // prevent double clicks
@@ -71,6 +89,36 @@ function PostDetails() {
   if (error) return <p>{error}</p>
   if (!post) return <p>Post not found</p>
 
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitting(true);
+    if (!newComment.trim()) return; // don't allow empty comments
+
+      const { data, error } = await supabase
+    .from('comments')
+    .insert([
+      {
+        post_id: id,
+        content: newComment,
+        author_id: currentUser?.id
+      }
+    ])
+    .select('id, content, created_at, profiles (id, name)');
+
+  if (error) {
+    console.error('Failed to post comment:', error);
+    setSubmitting(false);
+  }
+
+  else {
+    const newAddedComment = data[0]; // inserted comment
+    setCommentsList(prev => [...prev, newAddedComment]); // append
+    setNewComment(''); // clear input
+    setSubmitting(false); // reset submitting state
+  }
+  };
+  
+
   return (
     <div className="PostDetails">
       <h1>{post.title}</h1>
@@ -84,6 +132,27 @@ function PostDetails() {
       </button>
       <br />
       <Link to="/home">Back to Home</Link>
+      <div className="comments-section">
+        <h2>Comments</h2>
+          {commentsList.length > 0 ? (
+            commentsList.map(comment => (
+              <div className="comment-card" key={comment.id}>
+                <p><strong>{comment.profiles?.name || 'Anonymous'}:</strong> {comment.content}</p>
+                <small>{formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}</small>
+              </div>
+            ))
+          ) : (
+            <p key="no-comments">No comments yet.</p>
+          )}
+              <form onSubmit={handleCommentSubmit}>
+        <textarea
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write a comment..."
+        />
+        <button type="submit" disabled={submitting}>Post Comment</button>
+      </form>
+          </div>
     </div>
   )
 }
