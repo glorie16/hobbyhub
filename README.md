@@ -2,9 +2,9 @@
 
 Submitted by: **Gloriele Mendoza**
 
-This web app: **insert description**
+This web app: **is a Reddit-like app specifically for artists! I mostly aimed it towards digital art. Users can post asking questions or sharing their art and sketches. They can also ask for art critiques.**
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
 ## Required Features
 
@@ -38,14 +38,14 @@ The following **required** functionality is completed:
     - Each click increases the post's upvotes count by one
     - Users can upvote any post any number of times
 
-- [ ] **A post that a user previously created can be edited or deleted from its post pages**
+- [X] **A post that a user previously created can be edited or deleted from its post pages**
   - After a user creates a new post, they can go back and edit the post
   - A previously created post can be deleted from its post page
 
 The following **optional** features are implemented:
 
 
-- [ ] Web app implements pseudo-authentication
+- [X] Web app implements pseudo-authentication
   - Users can only edit and delete posts or delete comments by entering the secret key, which is set by the user during post creation
   - **or** upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them
   - For both options, only the original user author of a post can update or delete it
@@ -63,24 +63,26 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you added to improve the site's functionality!
+* [X] List anything else that you added to improve the site's functionality!
+
+NOTE: I used an upload file button that connects to Supabase storage instead of the image url for an easier user experience.
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a video walkthrough of my project (with sound/voiceover):
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+Video created with:
+- Zoom for recording
+- Youtube for uploading
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+- It was challenging handling user/login logic. I ended up using useContext from react to make user info from Supabase accessible on every page.
+- It was also difficult understanding in general how to access Supabase for users, posts, and comments. I made separate tables for each and used foreign keys to link some of the columns.
+- Overall this was a difficult but rewarding and fun final project!
+
 
 ## License
 
