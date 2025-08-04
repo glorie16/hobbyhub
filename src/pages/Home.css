@@ -1,0 +1,59 @@
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.Home {
+  padding: 2rem;
+  background-color: var(--background);
+}
+
+h1 {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sort-buttons {
+  margin: 1rem 0;
+}
+
+.sort-buttons button {
+  margin-right: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--secondary);
+  color: var(--background);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sort-buttons button:hover {
+  background-color: var(--accent);
+  color: var(--text-color);
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.createBtn {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.createBtn:hover {
+  background-color: var(--accent);
+  color: var(--text-color);
+}

@@ -4,9 +4,10 @@ import { supabase } from '../Client'
 import { useState } from 'react'
 import './Header.css' 
 
-function Header(props) {
+function Header({ currentPath, setSearchInput }) {
     const navigate = useNavigate()
     const [searchTerm, setSearchTerm] = useState('')
+    const hideSearchOn = ['/', '/login'];
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -17,8 +18,9 @@ function Header(props) {
   const handleSearchSubmit = (e) => {
     e.preventDefault()
     console.log('Searching for:', searchTerm)
-
   }
+
+  const showSearch = !hideSearchOn.includes(currentPath);
 
   return (
     <header className="header">
@@ -26,7 +28,7 @@ function Header(props) {
         <Link to="/" className="logo-link">🎨 ArtBase</Link>
       </h1>
 
-          
+      {showSearch &&(
       <form className="search-form" onSubmit={handleSearchSubmit}>
         <input
           type="text"
@@ -40,12 +42,22 @@ function Header(props) {
           className="search-input"
         />
       </form>
+      )}
 
           
       <nav className="nav">
+        {showSearch ? (
+          <>
         <Link to="/create-post" className="nav-link">Create Post</Link>
         <Link to="/home" className="nav-link">Home</Link>
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </>
+        ) : (
+          <>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/" className="nav-link">Signup</Link>
+          </>
+        )}
       </nav>
     </header>
   )

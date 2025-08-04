@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import { supabase } from '../Client'
 import Header from '../components/Header'
+import './Home.css'
 
-function Home() {
+function Home({ searchInput }) {
   const [posts, setPosts] = useState([])
-  const { currentUser, currentUserProfile } = useContext(UserContext);
-  const [searchInput, setSearchInput] = useState("")
+  // this gets profile info from UserContext, like name
+  const { currentUserProfile } = useContext(UserContext);
   const [filteredResults, setFilteredResults] = useState([])
   const [sortBy, setSortBy] = useState('newest')
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   // Listen for auth state and set current user
-   // Fetch posts as before
+   // Fetch posts
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -35,16 +37,18 @@ function Home() {
         console.error('Error fetching posts:', error)
         return
       }
-
       setPosts(data)
+      // print post/profile data to console for debugging
       console.log(JSON.stringify(data, null, 2))
     }
     fetchData()
-  }, [])
+  }, [refreshFlag])
 
   useEffect(() => {
     filterPosts()
   }, [searchInput, posts, sortBy])
+
+  const toggleRefresh = () => setRefreshFlag(prev => !prev);
 
   // Handle search input change and filter changes
   const filterPosts = () => {
@@ -61,18 +65,14 @@ function Home() {
     else if (sortBy === 'newest') {
       filtered = filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     }
-
-      setFilteredResults(filtered);
-      return;
+    setFilteredResults(filtered);
+    return;
   }
-  
 
   return (
     <div className="Home">
-      <Header
-      setSearchInput={setSearchInput}/>
       <h1>{`Welcome to Arthub, ${currentUserProfile?.name || 'Guest'}`}</h1>
-
+      
       <div className="sort-buttons">
         <button
           className="newest-button"
@@ -81,7 +81,10 @@ function Home() {
         </button>
         <button
           className="likes-button"
-          onClick={() => setSortBy('likes')}>
+          onClick={() => {
+            setSortBy('likes')
+            toggleRefresh();
+          }}>
           Most Likes
         </button>
       </div>
@@ -96,6 +99,7 @@ function Home() {
                 description={post.description}
                 created_at={post.created_at}
                 like_count={post.like_count}
+                onPostUpdated={toggleRefresh}
               />
             </Link>
           ))

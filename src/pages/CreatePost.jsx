@@ -90,7 +90,6 @@ const CreatePost = () => {
   return (
     <div>
       <h1>Create Post</h1>
-      <button onClick={() => window.location.href = '/home'}>Back to Home</button>
       <form onSubmit={createPost}>
         <label htmlFor="title">Title</label><br />
         <input type="text" id="title" name="title" onChange={handleChange} required /><br /><br />

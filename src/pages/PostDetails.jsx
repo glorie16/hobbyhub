@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContext';
 import { supabase } from '../Client'
 import { formatDistanceToNow, set } from 'date-fns'
+import './PostDetails.css'
 
 function PostDetails() {
   const { id } = useParams() // get post ID from URL
@@ -79,7 +80,6 @@ function PostDetails() {
 
     if (error) {
       console.error('Failed to update like count:', error)
-      // Optionally alert user
     } else {
       setCount(newCount)
     }
@@ -144,14 +144,14 @@ function PostDetails() {
   
 
   return (
-    <div className="PostDetails">
+    <div className="post-details">
       {currentUser?.id === post.user_id && (
         <>
         <button onClick={handleEdit}>Edit</button>
         <button onClick={deletePost}>Delete</button>
-  </>
-)}
-      <h1>{post.title}</h1>
+      </>
+    )}
+      <h2>{post.title}</h2>
       <p>By {post.profiles?.name || 'Unknown'}</p>
       <p>{post.description}</p>
       {post.img_url && <img src={post.img_url} alt={post.title} style={{ maxWidth: '100%' }} />}

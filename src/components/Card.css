@@ -1,0 +1,47 @@
+.Card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color); 
+  margin: 0;
+}
+
+.author {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color); 
+  margin: 0;
+}
+
+.Card small {
+  color: var(--text-color);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.likeButton {
+  align-self: flex-end;
+  background-color: #D96C80; /* pink */
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.likeButton:hover {
+  background-color: #BF2A52; /* darker pink */
+}

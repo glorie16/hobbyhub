@@ -4,3 +4,31 @@
   padding: 2rem;
   text-align: center;
 }
+
+:root {
+  /* Default theme (e.g. light) */
+  --primary: #D96C80;
+  --secondary: #BF2A52;
+  --accent: #BFB74C;
+  --background: #f4eacf;
+  --text-color: #0F1A2C; /* dark navy */
+  --header-bg: #f2bb30;
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --primary: #1E1E2F;
+  --secondary: #2F2F4F;
+  --accent: #8A9BA8;
+  --background: #121212;
+  --text-color: #F2E9CE;
+}
+
+/* Pastel theme */
+[data-theme='pastel'] {
+  --primary: #FADADD;
+  --secondary: #FEC8D8;
+  --accent: #CBAACB;
+  --background: #F2E9CE;
+  --text-color: #4A4A4A;
+}

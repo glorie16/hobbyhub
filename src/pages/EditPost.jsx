@@ -120,7 +120,6 @@ const EditPost = () => {
 
   return (
       <div>
-      <button onClick={() => window.location.href = '/home'}>Back to Home</button>
            <button onClick={deletePost}>Delete</button>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label><br />
