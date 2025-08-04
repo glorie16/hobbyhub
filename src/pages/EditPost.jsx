@@ -16,7 +16,7 @@ const EditPost = () => {
         .from('posts')
         .select('title, description, img_url')
         .eq('id', id)
-        .single();
+            .single(); 
 
       if (error) {
         console.error('Error fetching post:', error);
