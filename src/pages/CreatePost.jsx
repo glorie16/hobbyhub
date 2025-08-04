@@ -17,6 +17,11 @@ const CreatePost = () => {
     setImageFile(event.target.files[0]);
   };
 
+  const handleRemoveImage = () => {
+  setImageFile(null);
+  document.getElementById('image-input').value = ''; 
+};
+
   const uploadImage = async (file) => {
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}.${fileExt}`;
@@ -84,6 +89,8 @@ const CreatePost = () => {
 
   return (
     <div>
+      <h1>Create Post</h1>
+      <button onClick={() => window.location.href = '/home'}>Back to Home</button>
       <form onSubmit={createPost}>
         <label htmlFor="title">Title</label><br />
         <input type="text" id="title" name="title" onChange={handleChange} required /><br /><br />
@@ -98,7 +105,13 @@ const CreatePost = () => {
         /><br /><br />
 
         <label htmlFor="image">Image</label><br />
-        <input type="file" accept="image/*" onChange={handleFileChange} /><br /><br />
+        <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} /><br /><br />
+        {imageFile && (
+            <div>
+              <button type="button" onClick={handleRemoveImage}>Remove Image</button><br />
+            </div>
+          )}
+          <br />
 
         <input type="submit" value="Submit" />
       </form>

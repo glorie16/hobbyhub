@@ -98,36 +98,6 @@ function PostDetails() {
 
     if (!confirmed) return;
 
-  // Step 1: Fetch the post to get the image URL
-    const { data: postData, error: fetchError } = await supabase
-    .from('posts')
-    .select('img_url')
-    .eq('id', id)
-    .single();
-
-  if (fetchError) {
-    console.error('Failed to fetch post for deletion:', fetchError);
-    return;
-  }
-
-  // Step 2: Remove image from bucket if it exists
-  const imgUrl = postData?.img_url;
-  if (imgUrl) {
-    const urlParts = imgUrl.split('/post-images/');
-    if (urlParts.length === 2) {
-      const filePath = urlParts[1];
-
-      const { error: storageError } = await supabase.storage
-        .from('post-images')
-        .remove([filePath]);
-        console.log('Deleting file:', filePath);
-
-      if (storageError) {
-        console.warn('Failed to delete image from storage:', storageError);
-      }
-    }
-  }
-
     await supabase
           .from('posts')
           .delete()

@@ -95,10 +95,33 @@ const EditPost = () => {
     } else {
       navigate('/home'); 
     }
-  };
+    };
+    
+      
+      const deletePost = async (event) => {
+        event.preventDefault();
+        
+        const confirmed = window.confirm('Are you sure you want to delete this post?');
+    
+        if (!confirmed) return;
+    
+        await supabase
+              .from('posts')
+              .delete()
+              .eq('id', id)
+            
+           navigate('/home');
+    }
+    
+    const handleRemoveImage = () => {
+        setImageFile(null);
+        document.getElementById('image-input').value = '';
+    }
 
   return (
-    <div>
+      <div>
+      <button onClick={() => window.location.href = '/home'}>Back to Home</button>
+           <button onClick={deletePost}>Delete</button>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label><br />
         <input
@@ -124,8 +147,13 @@ const EditPost = () => {
         {post.img_url && !imageFile && (
           <img src={post.img_url} alt="Current" style={{ maxWidth: '200px' }} />
         )}
-        <input type="file" accept="image/*" onChange={handleFileChange} /><br /><br />
+        <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} /><br /><br />
 
+               {imageFile && (
+            <div>
+              <button type="button" onClick={handleRemoveImage}>Remove Image</button><br />
+            </div>
+          )}
         <input type="submit" value="Submit" />
       </form>
     </div>
