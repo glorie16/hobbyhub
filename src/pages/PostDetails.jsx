@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContext';
 import { supabase } from '../Client'
 import { formatDistanceToNow, set } from 'date-fns'
+import arrow from '../assets/arrow.png'
 import './PostDetails.css'
 
 function PostDetails() {
@@ -145,6 +146,9 @@ function PostDetails() {
 
   return (
     <div className="post-details">
+      <button onClick={() => navigate('/home')} className="back-button">
+        <img src={arrow} alt="back button" style={{ width: '20px', height: '20px' }} />
+      </button>
       {currentUser?.id === post.user_id && (
         <>
         <button onClick={handleEdit}>Edit</button>
@@ -161,7 +165,6 @@ function PostDetails() {
         ♥️ {count}
       </button>
       <br />
-      <Link to="/home">Back to Home</Link>
       <div className="comments-section">
         <h2>Comments</h2>
           {commentsList.length > 0 ? (
