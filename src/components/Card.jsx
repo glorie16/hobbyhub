@@ -20,17 +20,12 @@ const Card = (props) =>  {
     setCount((count) => count + 1)
     }
     
-    
-  const goToEdit = () => {
-      navigate('/edit/' + props.id);
-      }
       
   
   console.log("Like count:", props.like_count);
 
   return (
       <div className="Card">
-          <button className="editButton" onClick={goToEdit}>Edit</button>
           <h2 className="title">{props.title}</h2>
           <h3 className="author">{"by " + props.author}</h3>
       <small>

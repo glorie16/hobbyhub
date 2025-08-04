@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContext';
 import { supabase } from '../Client'
 import { formatDistanceToNow, set } from 'date-fns'
@@ -15,6 +15,7 @@ function PostDetails() {
   const [newComment, setNewComment] = useState('') // State for new comment input
   const [submitting, setSubmitting] = useState(false);
   const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -27,6 +28,7 @@ function PostDetails() {
           created_at,
           like_count,
           img_url,
+          user_id,
           profiles (
             id,
             name
@@ -40,7 +42,7 @@ function PostDetails() {
         console.error(error)
       } else {
         setPost(data)
-        setCount(data.like_count || 0) // initialize count
+        setCount(data.like_count || 0) 
       }
       setLoading(false)
     }
@@ -85,6 +87,55 @@ function PostDetails() {
     setUpdating(false)
   }
 
+    const handleEdit = () => {
+      navigate('/edit/' + id);
+  }
+  
+  const deletePost = async (event) => {
+    event.preventDefault();
+    
+    const confirmed = window.confirm('Are you sure you want to delete this post?');
+
+    if (!confirmed) return;
+
+  // Step 1: Fetch the post to get the image URL
+    const { data: postData, error: fetchError } = await supabase
+    .from('posts')
+    .select('img_url')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    console.error('Failed to fetch post for deletion:', fetchError);
+    return;
+  }
+
+  // Step 2: Remove image from bucket if it exists
+  const imgUrl = postData?.img_url;
+  if (imgUrl) {
+    const urlParts = imgUrl.split('/post-images/');
+    if (urlParts.length === 2) {
+      const filePath = urlParts[1];
+
+      const { error: storageError } = await supabase.storage
+        .from('post-images')
+        .remove([filePath]);
+        console.log('Deleting file:', filePath);
+
+      if (storageError) {
+        console.warn('Failed to delete image from storage:', storageError);
+      }
+    }
+  }
+
+    await supabase
+          .from('posts')
+          .delete()
+          .eq('id', id)
+        
+      navigate('/home');
+    }
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>
   if (!post) return <p>Post not found</p>
@@ -92,7 +143,10 @@ function PostDetails() {
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
-    if (!newComment.trim()) return; // don't allow empty comments
+    if (newComment.trim() === "") { // don't allow empty comments
+      setSubmitting(false);
+      return;
+    }
 
       const { data, error } = await supabase
     .from('comments')
@@ -121,6 +175,12 @@ function PostDetails() {
 
   return (
     <div className="PostDetails">
+      {currentUser?.id === post.user_id && (
+        <>
+        <button onClick={handleEdit}>Edit</button>
+        <button onClick={deletePost}>Delete</button>
+  </>
+)}
       <h1>{post.title}</h1>
       <p>By {post.profiles?.name || 'Unknown'}</p>
       <p>{post.description}</p>

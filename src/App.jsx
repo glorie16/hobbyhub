@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import CreatePost from './pages/CreatePost'
 import PostDetails from './pages/PostDetails'
+import EditPost from './pages/EditPost'
 import './App.css'
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-post" element={<CreatePost />} />
-        <Route path="post-details/:id" element={<PostDetails />} />
+          <Route path="post-details/:id" element={<PostDetails />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </UserProvider>
