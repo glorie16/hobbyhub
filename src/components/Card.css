@@ -1,12 +1,14 @@
 .Card {
-  background-color: white;
+   background-color: white;
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
+  margin: 1.2rem auto; /* top/bottom and automatic left/right */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-width: 70%;   /* limit max width */
+  width: 100vw;      
 }
 
 .title {
@@ -31,7 +33,7 @@
 
 .likeButton {
   align-self: flex-end;
-  background-color: #D96C80; /* pink */
+  background-color: var(--secondary);
   border: none;
   color: white;
   padding: 0.5rem 1rem;

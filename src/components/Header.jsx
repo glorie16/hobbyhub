@@ -25,7 +25,7 @@ function Header({ currentPath, setSearchInput }) {
   return (
     <header className="header">
       <h1 className="logo">
-        <Link to="/" className="logo-link">🎨 ArtBase</Link>
+        <Link to="/" className="logo-link">🎨 ArtHub</Link>
       </h1>
 
       {showSearch &&(
@@ -37,7 +37,7 @@ function Header({ currentPath, setSearchInput }) {
           onChange={e => {
             const value = e.target.value
             setSearchTerm(value)
-            props.setSearchInput(value) // Pass the search term to the parent component home.jsx
+            setSearchInput(value) // Pass the search term to the parent component home.jsx
           }}
           className="search-input"
         />

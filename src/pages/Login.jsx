@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom' 
-import { supabase } from '../Client'        
+import { useNavigate, Link } from 'react-router-dom' 
+import { supabase } from '../Client'       
+import './Login.css' 
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -62,35 +63,34 @@ function Login() {
       <div className="Login">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          <label>
-            Email 
             <input
               type="email"
-              value={email}
+            value={email}
+            placeholder="Email"
               onChange={e => setEmail(e.target.value)}
               required
               autoComplete="username"
                     />
                     <br/>
-          </label>
-
-          <label style={{ marginTop: '1rem' }}>
-            Password
             <input
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required
+            required
+            placeholder='Password'
               autoComplete="current-password"
             />
-          </label>
+  
 
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
-          <button type="submit" disabled={loading} style={{ marginTop: '1rem' }}>
+          <button type="submit" disabled={loading}>
             {loading ? 'Logging in...' : 'Log In'}
           </button>
         </form>
+        <p>
+                Don't have an account? <Link to="/">Sign Up</Link>
+              </p>
       </div>
     )
   }

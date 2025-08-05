@@ -2,12 +2,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 96%;
+  width: 100%;
   max-width: 100vw;
   padding: 1rem 2rem;
   background-color: var(--header-bg);
   border-bottom: 1px solid #ddd;
   display: flex;
+  height:80px;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
@@ -21,12 +22,28 @@
 .logo-link {
   text-decoration: none;
   color: #333;
+  border-radius: 12px;
+  padding: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-link:hover {
+  background-color: var(--primary);
+}
+
+a:hover {
+  color: white;
 }
 
 .nav {
   display: flex;
   gap: 2rem;
   align-items: center;
+}
+
+.nav-link:hover {
+  color: white;
+  text-decoration: underline;
 }
 
   .nav-link,
@@ -38,22 +55,28 @@
   border: none;
   cursor: pointer;
   font: inherit;
-  padding: 0;
+  padding: 0.5rem;
 }
 
 .nav-link {
   text-decoration: none;
-  color: #555;
+  color: var(--text-color);
   font-weight: 500;
 }
 
 .logout-btn {
   background: none;
   border: none;
-  color: #d9534f;
+  border-radius: 12px;
+  color: var(--secondary);
   cursor: pointer;
   font-weight: 500;
-  padding-right:1.2rem;
+  margin-right:1.2rem;
+}
+
+.logout-btn:hover {
+  color:white;
+  background-color: var(--secondary);
 }
 
 .search-form {
@@ -75,4 +98,8 @@
 .search-input:focus {
   border-color: #78c2fa; 
   box-shadow: #78c2fa;
+}
+
+h1{
+    font-family: 'Poppins', sans-serif;
 }

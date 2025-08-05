@@ -12,20 +12,49 @@
   transition: background-color 0.3s ease;          
 }
 
-.back-button img {
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.delete-button, .edit-button {
+  width: 40px;             
+  height: 40px;            
+  border-radius: 50%;     
+  border: none;            
+  background-color: #eee;  
+  display: flex;         
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;       
+  padding: 0;    
+  transition: background-color 0.3s ease; 
+  overflow: visible;     
+}
+
+.back-button img, .delete-button img, .edit-button img {
   width: 20px;             /* size of arrow image */
   height: 20px;
 }
 
 .back-button:hover {
-  background-color: var(--accent);  /* darker background on hover */
+  background-color: var(--accent); 
 }
 
 .post-details {
-  max-width: 800px;
+  width:700px;
   margin: 2rem auto;
+  margin-top: 80px;
   padding: 2rem;
-  background-color: var(--background);
+  background-color: white;
   color: var(--text-color);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -51,7 +80,14 @@
 .post-details img {
   max-width: 100%;
   border-radius: 8px;
-  margin: 1rem 0;
+}
+
+.post-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1rem 0 1.5rem 0;
+  height: auto;
+  object-fit: contain;
 }
 
 .likeButton {
@@ -81,12 +117,33 @@
 }
 
 .comment-card {
-  background-color: #fff;
-  border-left: 4px solid var(--primary);
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* change from flex-start to center for vertical alignment */
+  padding: 0.75rem 1rem;
+  background-color: #ece5e5;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+}
+
+.comment-card p {
+  margin: 0;
+  flex-grow: 1;
+  text-align: left;      /* force text to align left */
+  min-width: 0;          /* prevent overflow on long words */
+  word-wrap: break-word; /* break long words */
+  margin-left: 0.5rem;
+}
+
+.comment-card small {
+  white-space: nowrap;
+  margin-left: 1rem;
+  color: #777;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  text-align: right;
 }
 
 .comments-section textarea {
@@ -115,4 +172,10 @@
 
 .PostDetails button {
   margin-right: 0.5rem;
+}
+
+.like-button-wrapper {
+  display: flex;
+  justify-content: flex-end; /* aligns button to the left */
+  margin: 1rem 0; /* optional spacing */
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../Client'
+import './Login.css'
 
 function Signup() {
   const [email, setEmail] = useState('')
@@ -82,43 +83,35 @@ function Signup() {
 }, []);
 
   return (
-    <div className="Signup">
+    <div className="Login">
       <h2>Sign Up</h2>
       <form onSubmit={handleSignup}>
-        <label>
-          Name
           <input
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
             required
+            placeholder="Name"
             autoComplete="name"
           />
-        </label>
         <br />
-
-        <label>
-          Email
           <input
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            required
+          required
+          placeholder="Email"
             autoComplete="username"
           />
-        </label>
         <br />
-
-        <label>
-          Password
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
+            placeholder="Password"
             autoComplete="new-password"
           />
-        </label>
         <br />
 
         {error && <p style={{ color: 'red' }}>{error}</p>}

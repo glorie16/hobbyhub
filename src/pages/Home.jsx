@@ -74,13 +74,14 @@ function Home({ searchInput }) {
       <h1>{`Welcome to Arthub, ${currentUserProfile?.name || 'Guest'}`}</h1>
       
       <div className="sort-buttons">
+        <p>Sort by:</p>
         <button
-          className="newest-button"
+          className={`newest-button ${sortBy === 'newest' ? 'active' : ''}`}
           onClick={() => setSortBy('newest')}>
           Newest
         </button>
         <button
-          className="likes-button"
+          className={`likes-button ${sortBy === 'likes' ? 'active' : ''}`}
           onClick={() => {
             setSortBy('likes')
             toggleRefresh();

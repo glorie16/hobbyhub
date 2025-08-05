@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../Client';
+import './CreatePost.css';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -115,11 +116,12 @@ const EditPost = () => {
     
     const handleRemoveImage = () => {
         setImageFile(null);
+        setPost(prev => ({ ...prev, img_url: null }));
         document.getElementById('image-input').value = '';
     }
 
   return (
-      <div>
+      <div className="create-post-container">
            <button onClick={deletePost}>Delete</button>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label><br />
@@ -145,18 +147,18 @@ const EditPost = () => {
         <label htmlFor="image">Image</label><br />
         {post.img_url && !imageFile && (
           <img src={post.img_url} alt="Current" style={{ maxWidth: '200px' }} />
-        )}
-        <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} /><br /><br />
-
-               {imageFile && (
-            <div>
-              <button type="button" onClick={handleRemoveImage}>Remove Image</button><br />
-            </div>
-          )}
+              )}
+             <div className="file-upload-row">
+  <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} />
+  {(post.img_url || imageFile) && (
+    <button type="button" className="remove-btn" onClick={handleRemoveImage}>✕</button>
+  )}
+</div>
         <input type="submit" value="Submit" />
       </form>
     </div>
   );
 };
+
 
 export default EditPost;

@@ -4,6 +4,8 @@ import { UserContext } from '../contexts/UserContext';
 import { supabase } from '../Client'
 import { formatDistanceToNow, set } from 'date-fns'
 import arrow from '../assets/arrow.png'
+import bin from '../assets/bin.png'
+import draw from '../assets/draw.png'
 import './PostDetails.css'
 
 function PostDetails() {
@@ -146,24 +148,36 @@ function PostDetails() {
 
   return (
     <div className="post-details">
+      <div className="top-bar">
       <button onClick={() => navigate('/home')} className="back-button">
-        <img src={arrow} alt="back button" style={{ width: '20px', height: '20px' }} />
+        <img src={arrow} alt="back button" />
       </button>
       {currentUser?.id === post.user_id && (
         <>
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={deletePost}>Delete</button>
-      </>
-    )}
+          <div className="action-buttons">
+          <button onClick={handleEdit} className="edit-button">
+            <img src={draw} alt="edit"/>
+          </button>
+          <button onClick={deletePost} className="delete-button">
+            <img src={bin} alt="delete" />
+            </button>
+            </div>
+          </>
+          
+        )}
+        </div>
       <h2>{post.title}</h2>
       <p>By {post.profiles?.name || 'Unknown'}</p>
+       <small>Posted {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}</small>
       <p>{post.description}</p>
-      {post.img_url && <img src={post.img_url} alt={post.title} style={{ maxWidth: '100%' }} />}
-      <small>Posted {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}</small>
+      {post.img_url && <img className="post-image" src={post.img_url} alt={post.title} />}
+     
       <br />
+      <div className="like-button-wrapper">
       <button className="likeButton" onClick={updateCount} disabled={updating}>
         ♥️ {count}
-      </button>
+        </button>
+        </div>
       <br />
       <div className="comments-section">
         <h2>Comments</h2>
@@ -184,7 +198,8 @@ function PostDetails() {
           placeholder="Write a comment..."
         />
         <button type="submit" disabled={submitting}>Post Comment</button>
-      </form>
+        </form>
+        
           </div>
     </div>
   )

@@ -1,0 +1,85 @@
+.create-post-container {
+  max-width: 600px;
+  margin: 40px auto;
+  margin-top: 80px; /* Adjusted for fixed header */
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.create-post-container h2 {
+  text-align: center;
+  size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+.create-post-container label {
+  font-weight: 600;
+  color: var(--text-color  );
+}
+
+.create-post-container input[type="text"],
+.create-post-container textarea,
+.create-post-container input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.create-post-container textarea {
+  resize: vertical;
+}
+
+.create-post-container input[type="submit"] {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-post-container button:hover,
+.create-post-container input[type="submit"]:hover {
+  background-color: var(--primary);
+}
+
+.file-upload-row {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.file-upload-row input[type="file"] {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.create-post-container .remove-btn {
+  position: absolute;
+  top: 44%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  background: var(--primary);
+  color: white;
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.create-post-container .remove-btn:hover {
+  background: var(--secondary);
+}

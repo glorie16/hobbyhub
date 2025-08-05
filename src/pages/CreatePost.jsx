@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../Client';
+import './CreatePost.css';
 
 const CreatePost = () => {
   const [post, setPost] = useState({ title: '', description: '' });
@@ -88,8 +89,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div>
-      <h1>Create Post</h1>
+    <div className="create-post-container">
+      <h2>Create Post</h2>
       <form onSubmit={createPost}>
         <label htmlFor="title">Title</label><br />
         <input type="text" id="title" name="title" onChange={handleChange} required /><br /><br />
@@ -104,12 +105,17 @@ const CreatePost = () => {
         /><br /><br />
 
         <label htmlFor="image">Image</label><br />
-        <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} /><br /><br />
+
+         <div className="file-upload-row">
+        <input type="file" id="image-input" accept="image/*" onChange={handleFileChange} />
+        
         {imageFile && (
             <div>
-              <button type="button" onClick={handleRemoveImage}>Remove Image</button><br />
+              <button type="button" className="remove-btn"onClick={handleRemoveImage}>✕</button>
             </div>
           )}
+            </div>
+
           <br />
 
         <input type="submit" value="Submit" />

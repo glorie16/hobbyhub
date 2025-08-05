@@ -5,13 +5,17 @@
   text-align: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   /* Default theme (e.g. light) */
   --primary: #D96C80;
   --secondary: #BF2A52;
   --accent: #BFB74C;
   --background: #f4eacf;
-  --text-color: #0F1A2C; /* dark navy */
+  --text-color: #213566; /* dark navy */
   --header-bg: #f2bb30;
 }
 
