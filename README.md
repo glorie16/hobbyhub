@@ -65,11 +65,12 @@ The following **additional** features are implemented:
 
 * [X] List anything else that you added to improve the site's functionality!
 
-NOTE: I used an upload file button that connects to Supabase storage instead of the image url for an easier user experience.
+NOTE: I used an upload file button that connects to Supabase storage using a bucket instead of the image url for an easier user experience.
 
 ## Video Walkthrough
 
 Here's a video walkthrough of my project (with sound/voiceover):
+https://youtu.be/FPhEiwjuEiY
 
 Video created with:
 - Zoom for recording
