@@ -24,7 +24,7 @@
   color: #333;
   border-radius: 12px;
   padding: 1rem;
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .logo-link:hover {
@@ -98,8 +98,4 @@ a:hover {
 .search-input:focus {
   border-color: #78c2fa; 
   box-shadow: #78c2fa;
-}
-
-h1{
-    font-family: 'Poppins', sans-serif;
 }

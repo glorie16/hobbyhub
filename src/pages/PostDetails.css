@@ -45,8 +45,12 @@
   height: 20px;
 }
 
-.back-button:hover {
+.back-button:hover, .edit-button:hover {
   background-color: var(--accent); 
+}
+
+.delete-button:hover {
+  background-color: var(--secondary); 
 }
 
 .post-details {

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../Client';
+import bin from '../assets/bin.png';
+import arrow from '../assets/arrow.png';
 import './CreatePost.css';
 
 const EditPost = () => {
@@ -121,8 +123,19 @@ const EditPost = () => {
     }
 
   return (
-      <div className="create-post-container">
-           <button onClick={deletePost}>Delete</button>
+    <div className="create-post-container">
+      <div className="top-barr">
+        <button onClick={() => {const confirmed = window.confirm("Are you sure you want to exit with unsaved changes?");
+          if (confirmed) {
+            navigate('/home');
+          }
+        }} className="back-btn">
+                <img src={arrow} alt="back button" />
+              </button>
+            <button onClick={deletePost} className="delete-btn">
+                       <img src={bin} alt="delete" />
+        </button>
+        </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label><br />
         <input

@@ -83,3 +83,38 @@
 .create-post-container .remove-btn:hover {
   background: var(--secondary);
 }
+
+.top-barr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.delete-btn, .back-btn {
+  width: 40px;             
+  height: 40px;            
+  border-radius: 50%;     
+  border: none;            
+  background-color: #eee;  
+  display: flex;         
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;       
+  padding: 0;    
+  transition: background-color 0.3s ease; 
+  overflow: visible;     
+}
+
+.back-btn img, .delete-btn img {
+  width: 20px;             /* size of arrow image */
+  height: 20px;
+}
+
+.top-barr .back-btn:hover{
+  background-color: var(--accent); 
+}
+
+.top-barr .delete-btn:hover {
+  background-color: var(--secondary); 
+}
