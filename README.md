@@ -67,6 +67,9 @@ The following **additional** features are implemented:
 
 NOTE: I used an upload file button that connects to Supabase storage using a bucket instead of the image url for an easier user experience.
 
+## Link to Netlify App:
+https://arthubweb102.netlify.app/
+
 ## Video Walkthrough
 
 Here's a video walkthrough of my project (with sound/voiceover):
